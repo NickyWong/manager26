@@ -6,6 +6,9 @@ import './assets/base.css'
 
 import VueAxios from './lib/vue-axios'
 import router from './lib/router'
+import myBreadcrumb from './components/myBreadcrumb.vue'
+
+Vue.component('myBreadcrumb',myBreadcrumb);
 
 Vue.use(VueAxios);
 

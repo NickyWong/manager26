@@ -4,7 +4,7 @@
     <el-header>
             <el-row>
             <el-col :span="4">
-                <div class="grid-content bg-purple">
+                <div>
                 <img src="../assets/logo.png" alt>
                 </div>
             </el-col>
@@ -12,7 +12,7 @@
                 <div class="grid-content bg-purple-light">电商后台管理系统</div>
             </el-col>
             <el-col :span="2">
-                <div class="grid-content bg-purple">
+                <div>
                 <el-button  @click="logout" type="primary">退出登录</el-button>
                 </div>
             </el-col>
@@ -23,8 +23,6 @@
         <el-menu
         default-active="2"
         class="el-menu-vertical-demo"
-        @open="handleOpen"
-        @close="handleClose"
         background-color="#545c64"
         text-color="#fff"
         active-text-color="#ffd04b"
@@ -42,7 +40,9 @@
         </el-submenu>
         </el-menu>
     </el-aside>
-    <el-main>Main</el-main>
+    <el-main>
+        <router-view></router-view>
+    </el-main>
   </el-container>
 </el-container>
 
@@ -124,8 +124,6 @@ export default {
   .el-main {
     background-color: #e9eef3;
     color: #333;
-    text-align: center;
-    line-height: 160px;
   }
 }
 </style>

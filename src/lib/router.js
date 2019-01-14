@@ -5,6 +5,7 @@ Vue.use(VueRouter);
 
 import login from '../components/login.vue'
 import main from '../components/main.vue'
+import user from '../components/user.vue'
 
 let routes = [
     {
@@ -13,7 +14,13 @@ let routes = [
     },
     {
         path:'/',
-        component:main
+        component:main,
+        children:[
+            {
+              path:'users',
+              component:user
+            }
+          ]
     }
 ]
 
