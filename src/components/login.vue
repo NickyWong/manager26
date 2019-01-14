@@ -53,13 +53,13 @@ export default {
           // 成功
           // axios 调用接口
           this.$axios.post("login", this.formData).then(res => {
-            console.log(res);
+            // console.log(res);
             if (res.data.meta.status === 400) {
               // 错误
-              this.$message.error(res.data.meta.msg);
+              // this.$message.error(res.data.meta.msg);
             } else if (res.data.meta.status == 200) {
               // 正确
-              this.$message.success(res.data.meta.msg);
+              // this.$message.success(res.data.meta.msg);
                 window.sessionStorage.setItem('token',res.data.data.token);
                 this.$router.push('/');
             }

@@ -27,14 +27,16 @@
         @close="handleClose"
         background-color="#545c64"
         text-color="#fff"
-        active-text-color="#ffd04b">
-            <el-submenu index="1">
+        active-text-color="#ffd04b"
+        router>
+            <el-submenu v-for="(item, index) in menuList" :key="item.id" :index="item.order+''">
             <template slot="title">
-            <i class="el-icon-location"></i>
-            <span>导航一</span>
+            <i class="el-icon-menu"></i>
+            <span>{{item.authName}}</span>
             </template>
-            <el-menu-item index="1-1">
-                <i class="el-icon-location"></i>选项1
+            <el-menu-item v-for="(it, i) in item.children" :key="it.id" :index="'/'+it.path">
+                <i class="el-icon-location"></i>
+                {{it.authName}}
                 </el-menu-item>
             </el-submenu>
         </el-submenu>
@@ -50,6 +52,11 @@
 <script>
 export default {
   name: "app",
+  data() {
+      return {
+          menuList:[]
+      }
+  },
   beforeCreate() {
     let token = window.sessionStorage.getItem("token");
     if (token) {
@@ -79,38 +86,46 @@ export default {
           });
         });
     }
-  }
+  },
+  created() {
+      this.$axios.get('menus',{
+          headers:{
+              Authorization: window.sessionStorage.getItem("token")
+          }
+      }).then(res=>{
+          this.menuList = res.data.data
+      })
+  },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .main-container {
   height: 100%;
-}
+  .el-container {
+    height: 100%;
+  }
 
-.el-container {
-  height: 100%;
-}
+  .el-header,
+  .el-footer {
+    background-color: #b3c0d1;
+    color: #333;
+    text-align: center;
+    line-height: 60px;
+  }
 
-.el-header,
-.el-footer {
-  background-color: #b3c0d1;
-  color: #333;
-  text-align: center;
-  line-height: 60px;
-}
+  .el-aside {
+    background-color: #d3dce6;
+    color: #333;
+    text-align: center;
+    line-height: 200px;
+  }
 
-.el-aside {
-  background-color: #d3dce6;
-  color: #333;
-  text-align: center;
-  line-height: 200px;
-}
-
-.el-main {
-  background-color: #e9eef3;
-  color: #333;
-  text-align: center;
-  line-height: 160px;
+  .el-main {
+    background-color: #e9eef3;
+    color: #333;
+    text-align: center;
+    line-height: 160px;
+  }
 }
 </style>
